@@ -5,10 +5,12 @@ html{
     font-family:  "Segoe UI", Arial, sans-serif;
 }
 
+
 h1{
     color: #fff;
     padding: 10px;
 }
+
 
 .box{
     max-width: 400px;
@@ -18,10 +20,12 @@ h1{
     box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
 
+
 #heading{
     background-color: #A683E3;
     text-align: center;
 }
+
 
 .item{
     min-height: 70px;
@@ -35,10 +39,12 @@ h1{
     border-bottom: 0;
 }
 
+
 input:checked+p{
     text-decoration: line-through;
     text-decoration-color: #A683E3;
 }
+
 
 input[type="checkbox"]{
     margin: 20px;
@@ -53,10 +59,12 @@ p{
     color: #00204a;
 }
 
+
 form{
     text-align: center;
     margin-left: 20px;
 }
+
 
 button{
     min-height: 50px;
@@ -87,14 +95,15 @@ input[type="text"]:focus {
     box-shadow: inset 0 -3px 0 0 #A683E3;
 }
 
+
 ::placeholder {
     color: grey;
     opacity: 1;
 }
+
 
 footer {
     color: white;
     color: rgba(0, 0, 0, 0.5);
     text-align: center;
 }
-  

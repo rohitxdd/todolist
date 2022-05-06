@@ -34,8 +34,6 @@ app.post("/", (req , res )=>{
     }
 })
 
-
-
 //init the server to 3000 port
 app.listen(3000, ()=>{
     console.log("listening to http://localhost:3000/")
