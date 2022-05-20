@@ -11,26 +11,23 @@
     <div class="box" id="heading">
         <h1>It's <%= KindOfDay %></h1>
     </div>
+    <form action="/delete" method="post">
     <div class="box">
         <%itemarr.forEach((item)=>{%>
         <div class="item">
-            <input type="checkbox">
-            <p><%=item%></p>
+            <input type="checkbox" name="checkbox" value="<%= item._id%>" onchange="this.form.submit()">
+            <p><%=item.name%></p>
+        
         </div>
         <%})%>
+    </form>
 
-        <form action="/" method="post">
+        <form action="/" method="post" class="item">
             <input type="text" name="NewItem" placeholder="Add New Item" autocomplete="off">
             <button type="submit" name="list", value="<%= KindOfDay %>">+</button>
         </form>
     </div>
-    <!-- <df-messenger
-        intent="WELCOME"
-        chat-title="dmofice"
-        agent-id="5ecae7fc-6d5e-42d7-9b7a-5775ebf4aada"
-        language-code="en">
-    </df-messenger> -->
 
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
