@@ -9,22 +9,24 @@
 </head>
 <body>
     <div class="box" id="heading">
-        <h1>It's <%= KindOfDay %></h1>
+        <h1><%=KindOfDay%>'s List</h1>
     </div>
     <form action="/delete" method="post">
     <div class="box">
         <%itemarr.forEach((item)=>{%>
         <div class="item">
-            <input type="checkbox" name="checkbox" value="<%= item._id%>" onchange="this.form.submit()">
+            
+            <input type="checkbox" name="checkbox" value="<%=item._id%>" onchange="this.form.submit()">
             <p><%=item.name%></p>
-        
+            
         </div>
         <%})%>
+        <input type="hidden" name="check_id" value="<%=KindOfDay%>">
     </form>
 
         <form action="/" method="post" class="item">
             <input type="text" name="NewItem" placeholder="Add New Item" autocomplete="off">
-            <button type="submit" name="list", value="<%= KindOfDay %>">+</button>
+            <button type="submit" name="list", value="<%=KindOfDay%>">+</button>
         </form>
     </div>
 
