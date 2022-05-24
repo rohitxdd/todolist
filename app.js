@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 
 
 
-//mongoose connect
+//mongoose connect to local mongo database
 mongoose.connect("mongodb://localhost:27017/toDoListDB")
 
-//creating schema
+//creating schema for our local server
 const toDoSchema = {
     name: {
         type: String,
@@ -15,7 +15,7 @@ const toDoSchema = {
     }
 }
 
-// mongoose model
+// mongoose model for Today list
 const Items = new mongoose.model("Item", toDoSchema);
 
 // inserting default Items
@@ -38,19 +38,22 @@ const listSchema = {
     listItem: [toDoSchema]
 }
 
+
+// Mongoose model for Custom List
 const List = new mongoose.model("list", listSchema)
 
-
+//Initializing express 
 const app = express();
+//Setting view engine to use ejs
 app.set('view engine' , 'ejs');
 app.use(express.urlencoded({ extended: true }));
+
+//To use static files
 app.use(express.static("public"));
 
 //handling get request
 app.get("/", (req,res)=>{
-    // var options = { weekday: 'long', month: 'long', day: 'numeric' };
-    // var today = new Date;
-    // var Day = today.toLocaleDateString(undefined, options)
+//Find query on Items collection
     Items.find({}, function(err, itemarr){
         if(err){
             console.log(err);
@@ -59,7 +62,7 @@ app.get("/", (req,res)=>{
                 if(err){
                     console.log(err);
                 }else{
-                    console.log("default items inserted");
+                    // console.log("default items inserted");
                 }
             })
             res.redirect("/")
@@ -68,10 +71,10 @@ app.get("/", (req,res)=>{
         }
         
     })
-    
+
 })
 
-
+//handling all the post request
 app.post("/", (req , res )=>{
     if (req.body.NewItem != ""){
         let itemName = req.body.NewItem;
@@ -142,19 +145,19 @@ app.post("/delete", function(req,res){
 //express routes
 app.get("/:customListName", (req,res)=>{
     if(req.params.customListName !== "favicon.ico"){
-    List.findOne({name:req.params.customListName}, function(err, listArr){
-        if (!err){
-            if(!listArr){
-                const listItems = new List({
-                    name: req.params.customListName,
-                    listItem: defaultItem
-                })
-                listItems.save(()=>res.redirect("/"+req.params.customListName))    
-            }else{
-                res.render("lists", {KindOfDay:listArr.name, itemarr:listArr.listItem})
+        List.findOne({name:req.params.customListName}, function(err, listArr){
+            if (!err){
+                if(!listArr){
+                    const listItems = new List({
+                        name: req.params.customListName,
+                        listItem: defaultItem
+                    })
+                    listItems.save(()=>res.redirect("/"+req.params.customListName))    
+                }else{
+                    res.render("lists", {KindOfDay:listArr.name, itemarr:listArr.listItem})
+                }
             }
-        }
-    })
+        })
     }
 })
 
